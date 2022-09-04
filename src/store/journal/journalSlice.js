@@ -6,11 +6,11 @@ export const journalSlice = createSlice({
     isSaving: false,
     messageSaved: '',
     notes: [],
-    activeNote: [],
+    activeNote: null,
   },
   reducers: {
     savingNewNote: (state) => {
-      state.isSaving = true ;
+      state.isSaving = true;
     },
     addNewEmptyNote: (state, action) => {
       state.notes.push(action.payload);
@@ -22,8 +22,18 @@ export const journalSlice = createSlice({
     setNotes: (state, action) => {
       state.notes = action.payload;
     },
-    setSaving: (state, action) => {},
-    updateNote: (state, action) => {},
+    setSaving: (state, action) => {
+      state.isSaving = true;
+    },
+    updateNote: (state, action) => {
+      state.isSaving = false;
+      state.notes = state.notes.map((note) => {
+        if (note.id === action.payload.id) {
+          return action.payload
+        }
+        return note;
+      });
+    },
     deleteNoteById: (state, action) => {},
   },
 });

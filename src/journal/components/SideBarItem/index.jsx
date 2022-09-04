@@ -8,18 +8,14 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { setActiveNote } from '../../../store';
+import { setActiveNote } from '../../../store/journal';
 
 export const SideBarItem = ({ title = '', body, id, date, imageUrl = [] }) => {
   const dispatch = useDispatch();
   const onClickNote = () => {
     dispatch(
       setActiveNote({
-        title,
-        body,
-        id,
-        date,
-        imageUrl,
+        title, body, id, date, imageUrl,
       })
     );
   };
