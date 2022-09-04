@@ -2,13 +2,22 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
 
+const {
+  VITE_FIREBASE_API_KEY,
+  VITE_FIREBASE_AUTH_DOMAIN,
+  VITE_FIREBASE_PROJECT_ID,
+  VITE_FIREBASE_STORAGE_BUCKET,
+  VITE_FIREBASE_MESSAGING_SENDER_ID,
+  VITE_FIREBASE_APP_ID,
+} = import.meta.env;
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyDwG5-ZpvSCZIUPFu-gym5omtrS8vubTDY',
-  authDomain: 'journal-app-16b9d.firebaseapp.com',
-  projectId: 'journal-app-16b9d',
-  storageBucket: 'journal-app-16b9d.appspot.com',
-  messagingSenderId: '377633584444',
-  appId: '1:377633584444:web:4573958b1f0b8d46c01a39',
+  apiKey: VITE_FIREBASE_API_KEY,
+  authDomain: VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: VITE_FIREBASE_PROJECT_ID,
+  storageBucket: VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: VITE_FIREBASE_APP_ID,
 };
 
 export const FirebaseApp = initializeApp(firebaseConfig);
