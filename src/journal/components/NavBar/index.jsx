@@ -3,19 +3,28 @@ import { LoginOutlined, MenuOutlined } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { startLogout } from '../../../store';
 
+let windowSize = window.innerWidth;
+let sxConfig = {};
+
 export const NavBar = ({ drawerWidth }) => {
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(startLogout());
   };
-  return (
-    <AppBar
-      position="fixed"
-      sx={{
+
+  windowSize > 415
+    ? (sxConfig = {
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         ml: { sm: `${drawerWidth}px` },
-      }}
-    >
+      })
+    : (sxConfig = {
+        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        ml: { sm: `${drawerWidth}px` },
+        paddingLeft: drawerWidth / 8,
+      });
+
+  return (
+    <AppBar position="fixed" sx={sxConfig}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -31,7 +40,7 @@ export const NavBar = ({ drawerWidth }) => {
           alignItems="center"
         >
           <Typography variant="h6" noWrap component="div">
-            Journal App
+            Mi Diario
           </Typography>
           <IconButton onClick={onLogout} color="error">
             <LoginOutlined />

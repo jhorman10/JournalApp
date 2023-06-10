@@ -10,12 +10,18 @@ import {
 } from '@mui/material';
 import { setActiveNote } from '../../../store/journal';
 
+let windowSize = window.innerWidth;
+
 export const SideBarItem = ({ title = '', body, id, date, imageUrl = [] }) => {
   const dispatch = useDispatch();
   const onClickNote = () => {
     dispatch(
       setActiveNote({
-        title, body, id, date, imageUrl,
+        title,
+        body,
+        id,
+        date,
+        imageUrl,
       })
     );
   };
@@ -24,17 +30,29 @@ export const SideBarItem = ({ title = '', body, id, date, imageUrl = [] }) => {
     return title.length > 17 ? `${title.substring(0, 17)}...` : title;
   }, [title]);
 
-  return (
-    <ListItem disablePadding>
+  let item = () => {
+    return windowSize <= 420 ? (
       <ListItemButton onClick={onClickNote}>
-        <ListItemIcon>
-          <TurnedInNot />
-        </ListItemIcon>
+        <Grid container>
+          <ListItemText primary={`* ${newTitle}`} />
+        </Grid>
+      </ListItemButton>
+    ) : (
+      <ListItemButton onClick={onClickNote}>
+          <ListItemIcon>
+            <TurnedInNot />
+          </ListItemIcon>
         <Grid container>
           <ListItemText primary={newTitle} />
           <ListItemText secondary={body} />
         </Grid>
       </ListItemButton>
+    );
+  };
+
+  return (
+    <ListItem disablePadding>
+      {item()}
     </ListItem>
   );
 };

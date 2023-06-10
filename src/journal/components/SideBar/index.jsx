@@ -1,17 +1,11 @@
-import {
-  Box,
-  Divider,
-  Drawer,
-  List,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { Box, Divider, Drawer, List, Toolbar, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { SideBarItem } from '../SideBarItem';
 
 export const SideBar = ({ drawerWidth }) => {
   const { displayName } = useSelector((state) => state.auth);
   const { notes } = useSelector((state) => state.journal);
+  
   return (
     <Box
       component="nav"
@@ -25,11 +19,14 @@ export const SideBar = ({ drawerWidth }) => {
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            {displayName}
-          </Typography>
-        </Toolbar>
+        {drawerWidth >= 320 && (
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div">
+              {displayName}
+            </Typography>
+          </Toolbar>
+        )}
+
         <Divider />
         <List>
           {notes.map((note) => (
