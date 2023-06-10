@@ -3,10 +3,10 @@ import { LoginOutlined, MenuOutlined } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { startLogout } from '../../../store';
 
-let windowSize = window.innerWidth;
-let sxConfig = {};
-
 export const NavBar = ({ drawerWidth }) => {
+  let windowSize = window.innerWidth;
+  let sxConfig = {};
+
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(startLogout());
